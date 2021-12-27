@@ -1,23 +1,18 @@
-#!groovy
 pipeline {
-   agent {
-  docker {
-    image "app:latest"
-    args "-u root"  
-    alwaysPull false
-    reuseNode true
-  }
+    agent any
+    triggers {
+        pollSCM '* * * * *'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh './gradlew assemble'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew test'
+            }
+        }
+    }
 }
-   stages {     
-    stage('Maven Install') {
-      agent {         
-       docker {          
-         image 'maven:3.5.0'         
-     }       
-  }       
-  steps {
-       sh 'mvn clean install'
-       }
-     }
-   }
- }
