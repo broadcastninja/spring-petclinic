@@ -1,6 +1,13 @@
 #!groovy
 pipeline {
-    agent none
+   agent {
+  docker {
+    image "app:latest"
+    args "-u root"  
+    alwaysPull false
+    reuseNode true
+  }
+}
    stages {     
     stage('Maven Install') {
       agent {         
