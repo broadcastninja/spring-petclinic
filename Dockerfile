@@ -1,5 +1,5 @@
-FROM anapsix/alpine-java
-LABEL maintainer="itzhak.g@claroty.com"
-COPY /target/spring-petclinic-1.5.1.jar /home/spring-petclinic-1.5.1.jar
-CMD ["java","-jar","/home/spring-petclinic-1.5.1.jar"]
+FROM openjdk:17
+ARG JAR_FILE
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
 
