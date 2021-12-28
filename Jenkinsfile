@@ -8,6 +8,7 @@ pipeline {
             steps {
                 git url: 'https://github.com/cyrille-leclerc/multi-module-maven-project'
                 withMaven {
+                    chmod +x ./gradlew
                     sh './gradlew assemble'
                 }
             }
@@ -16,6 +17,7 @@ pipeline {
             steps {
                 git url: 'https://github.com/cyrille-leclerc/multi-module-maven-project'
                 withMaven {
+                    chmod +x ./gradlew
                     sh './gradlew test'
                 }
             }
