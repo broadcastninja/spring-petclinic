@@ -6,12 +6,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew assemble'
+                git url: 'https://github.com/cyrille-leclerc/multi-module-maven-project'
+                withMaven {
+                    sh './gradlew assemble'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh './gradlew test'
+                git url: 'https://github.com/cyrille-leclerc/multi-module-maven-project'
+                withMaven {
+                    sh './gradlew test'
+                }
             }
         }
     }
